@@ -1,0 +1,85 @@
+/* Compact card style with right-aligned close-style buttons */
+.card {
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.03); /* Slight zoom on hover */
+}
+
+.card h6 {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.btnCard{
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    width: 60px;
+}
+
+.text-muted {
+    font-size: 0.9rem;
+}
+
+.btn-outline-secondary {
+    background-color: transparent;
+    color: #6c757d; /* Light gray for edit */
+}
+
+.btn-outline-danger {
+    background-color: transparent;
+    color: #dc3545; /* Red color for delete */
+}
+
+.btn-outline-secondary:hover, .btn-outline-danger:hover {
+    color: white;
+    background-color: #6c757d; /* Light gray on hover for edit */
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545; /* Red on hover for delete */
+}
+
+/* Align buttons to the right */
+.d-flex.justify-content-end {
+    justify-content: flex-end; /* Align to the right */
+}
+
+
+.productSide {
+    position: relative; /* Ensures that the absolute positioning is relative to this container */
+}
+
+.productDetail {
+    position: absolute;
+    right: 0;           /* Position it to the right edge */
+    top: 0;             /* Adjust the top distance as needed */
+    width: 300px;    
+    height: 80vh;   /* Set the width of the product detail box */
+    background-color: #fff; /* Optional: set a background for visibility */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Optional: shadow for better visibility */
+    display: none;      /* Hidden initially, you can toggle with JavaScript */
+    padding: 20px;      /* Padding inside the product detail box */
+    z-index: 10;        /* Ensure it's on top if needed */
+    transition: transform 0.3s ease-in-out; /* Smooth transform transition */
+}
+
+/* Close button customization */
+#closeProDetail {
+    padding: 0;
+    font-size: 1.5rem;
+    color: #dc3545; /* Red for danger color */
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+/* Optional: Add a transition for smooth visibility changes */
+.productDetail {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+
