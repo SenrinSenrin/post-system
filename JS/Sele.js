@@ -41,8 +41,6 @@ function addProToCart(product) {
             addProCarts.push(product);
             saveProduct(addProCarts);
             displayAddToCart();
-            location.reload();
-            console.log("Product added:", product);
         } else {
             console.log("Product already in cart:", product);
         }
