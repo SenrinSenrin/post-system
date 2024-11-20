@@ -1,11 +1,11 @@
 
 let productData;
-let addProCarts = [];
 
 const containerRow = document.getElementById("productContainer");
 let producSide = document.getElementById("producSide")
 let productCart = document.getElementById("productChart")
-const listCart = document.getElementById("list-group")
+const addToCartPro = document.getElementById("addtoCart")
+const buttonsAddCart = document.querySelectorAll('.bntAddCart');
 
 function loadProduct(){
     // Get product data from localStorage
@@ -23,31 +23,6 @@ function loadProduct(){
 function saveProduct(data){
     localStorage.setItem("addProductsCart", JSON.stringify(data));
 }
-
-
-function addProToCart(product) {
-    if (addProCarts.length === 0) {
-        // If addProCarts is empty, add the product directly
-        addProCarts.push(product);
-        saveProduct(addProCarts);
-        displayAddToCart();
-        console.log("Product added:", product);
-    } else {
-        // Check if the product already exists in addProCarts
-        const exists = addProCarts.some(item => item.id === product.id);
-        
-        if (!exists) {
-            // If the product does not exist, add it to the cart
-            addProCarts.push(product);
-            saveProduct(addProCarts);
-            displayAddToCart();
-        } else {
-            console.log("Product already in cart:", product);
-        }
-    }
-}
-
-
 
 function showProducts() {
     containerRow.innerHTML = ""; // Clear the container before adding new cards
@@ -80,11 +55,12 @@ function showProducts() {
         // Create link button
         const cardButton = document.createElement("a");
         cardButton.href = "#";
-        cardButton.className = "btn btn-primary alinge-item-end";
+        cardButton.className = "btn btn-primary alinge-item-end bntAddCart";
         cardButton.textContent = "Add to cart";
         cardButton.addEventListener("click",function(){
             openNav();
-            addProToCart(product);
+            // addProToCart(product);
+            displayAddToCart(product);
         });
 
         // Append title, text, and button to the card body
@@ -100,22 +76,53 @@ function showProducts() {
         containerRow.appendChild(containercard);
     }
 }
+// Initialize addProCarts if it's not already defined
+function displayAddToCart(carts) {
+    if (!carts) return;
 
-function displayAddToCart(){
-    for (const cart of addProCarts){
-        const listItem = document.createElement('li');
-        listItem.className = 'list-group-item d-flex justify-content-between align-items-center';   
-        listItem.textContent = `${cart.productName} - $${cart.price} x ${cart.quantity}`;
-        btnAddToCart = document.createElement('button')
-        btnAddToCart.textContent = 'Remove'
-        btnAddToCart.className = 'btn btn-sm btn-danger'
-        listItem.appendChild(btnAddToCart)
-        listItem.querySelector('button').addEventListener('click', function(){
-            removeFromCart(cart)
-        })
-        listCart.appendChild(listItem)
+    // Clear previous content to display only the new product
+    addToCartPro.innerHTML = '';
+    let totals = carts.price;
+
+    // Helper function to create and append elements
+    function createDetailRow(label, value, isInput = false) {
+        const row = document.createElement('span');
+        row.className = 'd-flex justify-content-between';
+
+        const labelElem = document.createElement('strong');
+        labelElem.textContent = label;
+
+        const valueElem = isInput ? document.createElement('input') : document.createElement('strong');
+        if (isInput) {
+            valueElem.type = 'number';
+            valueElem.value = value;
+            valueElem.addEventListener('input', function () {
+                console.log(`Updated Quantity: ${valueElem.value}`);
+                totals = carts.price * valueElem.value
+                test(totals)
+            });
+        } else {
+            valueElem.textContent = value;
+        }
+
+        row.appendChild(labelElem);
+        row.appendChild(valueElem);
+        return row;
     }
+    function test(dd){
+        console.log(dd);
+            // Create rows for product details
+        addToCartPro.appendChild(createDetailRow("Product: ", carts.productName));
+        addToCartPro.appendChild(createDetailRow("Price: ", dd));
+        addToCartPro.appendChild(createDetailRow("Category: ", carts.categories));
+        addToCartPro.appendChild(createDetailRow("Quantity: ", 1, true));
+    }
+    return test();
+        
 }
+
+
+
 
 /* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
 function openNav() {
@@ -123,8 +130,6 @@ function openNav() {
     productCart.style.width = "350px";
     document.getElementById("producSide").style.marginRight = "350px";
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-    // console.log("log code for");
-    
 }
 
 /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
@@ -133,8 +138,8 @@ function closeCart() {
     document.getElementById("producSide").style.marginRight = "0";
     document.body.style.backgroundColor = "white";
 
-    addProCarts.push([]);
-    saveProductCart(addProCarts);
+    // addProCarts.push([]);
+    // saveProductCart(addProCarts);
     // location.reload();
 }
 
