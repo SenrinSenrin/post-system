@@ -1,8 +1,8 @@
 let productData = [
-    {proId: 1,productName: "Product01", price: 12, quantity: 5, categories: "foods"},
-    {proId: 2,productName: "Product02", price: 13, quantity: 5, categories: "drinks"},
-    {proId: 3,productName: "Product03", price: 14, quantity: 5, categories: "energy"},
-    {proId: 4,productName: "Product04", price: 15, quantity: 5, categories: "equipment"},
+    // {proId: 1,productName: "Product01", price: 12, quantity: 5, categories: "foods"},
+    // {proId: 2,productName: "Product02", price: 13, quantity: 5, categories: "drinks"},
+    // {proId: 3,productName: "Product03", price: 14, quantity: 5, categories: "energy"},
+    // {proId: 4,productName: "Product04", price: 15, quantity: 5, categories: "equipment"},
 ];
 
 let categoryData = [];
@@ -15,8 +15,9 @@ const btnEditPro = document.getElementById("editPro")
 const btnAdd = document.getElementById("addPro")
 const addProBtn = document.getElementById("addBtn")
 const productDetail = document.getElementById("productDetail")
-const closeProDetailBtn = document.getElementById("closeProDetail").addEventListener("click", () => {productDetail.style.display = "none";});  // Correctly change the display style
+const closeProDetailBtn = document.getElementById("closeProDetail").addEventListener("click", () => hideProductDetails());  // Correctly change the display style
 const cateOptions = document.getElementById("proCategory")
+// const productDetail = document.getElementById('productDetail');
 
 console.log(addProductBtn);
 
@@ -82,9 +83,11 @@ function addNewPro() {
 }
 
 function editProduct() {
-    let proId = localStorage.getItem('id');
-    let product = productData.find(product => product.proId === parseInt(proId));
-    product.proId = proId;
+    let id = localStorage.getItem('id');
+    console.log(id);
+    
+    let product = productData.find(product => product.proId === parseInt(id));
+    product.proId = Number(id);
     product.productName = `${document.getElementById('proName').value}`;
     product.price = `${document.getElementById('proPrice').value}`;
     product.quantity = `${document.getElementById('proQuantity').value}`;
@@ -139,7 +142,6 @@ function showCard() {
     // console.log(productData);
     for (const pro of productData) {
         const cardCol = document.createElement("div");
-        cardCol.addEventListener("click", ()=>showProductDetails(pro))
         cardCol.className = "col-md-3 mb-3"; // Each card takes up 1/4th width on medium and larger screens
     
         const cardContainer = document.createElement("div");
@@ -147,6 +149,7 @@ function showCard() {
     
         // Product title
         const cardTitle = document.createElement("h6");
+        cardTitle.addEventListener("click", ()=>showProductDetails(pro))
         cardTitle.className = "mb-1 text-dark"; // Small title with dark color
         cardTitle.textContent = pro.productName;
     
@@ -218,22 +221,43 @@ function deleteProSuccessMessage() {
 
 // Display product details when clicked
 function showProductDetails(product) {
-    
-    if (product) {
-        const productDetailsContent = document.getElementById('productDetailsContent');
 
+    if (product) {
         // Update product details content dynamically
         productDetailsContent.innerHTML = `
-            <h3>${product.productName}</h3>
-            <p><strong>Price:</strong> $${product.price}</p>
-            <p><strong>Quantity:</strong> ${product.quantity}</p>
-            <p><strong>Category:</strong> ${product.categories}</p>
+            <div class="cart-item mb-3">
+                <div class="card-body d-flex justify-content-between align-items-center"> 
+                    <span class="cart-item-name fw-bold text-primary">Product name</span>
+                    <span class="cart-item-price text-success">${product.productName}</span>
+                </div>
+                <div class="card-body d-flex justify-content-between align-items-center"> 
+                    <span class="cart-item-name fw-bold text-primary">Price</span>
+                    <span class="cart-item-price text-success">$${product.price}</span>
+                </div>
+                <div class="card-body d-flex justify-content-between align-items-center"> 
+                    <span class="cart-item-name fw-bold text-primary">Quantity</span>
+                    <span class="cart-item-price text-success">${product.quantity}</span>
+                </div>
+                <div class="card-body d-flex justify-content-between align-items-center"> 
+                    <span class="cart-item-name fw-bold text-primary">Categories</span>
+                    <span class="cart-item-price text-success">${product.categories}</span>
+                </div>
+            </div>
         `;
 
-        // Show the product detail section
-        productDetail.style.display = "block";
+        // Add the active class to start the grow animation
+        productDetail.classList.add('active');
     }
+
 }
+
+function hideProductDetails() {
+
+    // Remove the active class to reverse the grow animation
+    productDetail.classList.remove('active');
+}
+
+
 
 
 addProBtn.addEventListener("click", (e) => {

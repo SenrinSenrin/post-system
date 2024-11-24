@@ -47,7 +47,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center" href="#">
+                        <a class="nav-link d-flex align-items-center" href="Customer.html">
                             <span class="material-symbols-outlined me-2">people</span>
                             <span>Customers</span>
                         </a>
@@ -58,19 +58,19 @@
                             <span>Categories</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link d-flex align-items-center" href="#">
                             <span class="material-symbols-outlined me-2">bar_chart</span>
                             <span>Reports</span>
                         </a>
-                    </li>                    
+                    </li>                     -->
                 </ul>
             </div>
         </nav>
         <!-- Main Content -->
         <main class="col-md-2 ms-sm-auto col-lg-10">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Orders pro</h1>
+                <h1 class="h2">Orders products</h1>
             </div>
 
             <div class="producSide" id="producSide">
@@ -83,13 +83,86 @@
                 <div class="productChart p-0" id="productChart">
                     <!-- Static Cart Display -->
                     <div class="">
-                        <h5 class="p-2 bg-success text-white text-center">Your Cart</h5>
-                        <div class="d-flex flex-column p-3" id="addtoCart">
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn-close custom-danger" aria-label="Close" onclick="closeCart()"></button>
+                            <h5 class="p-2 bg-success text-white text-center">Your Cart</h5>
+                        </div>
+                        <div class="d-flex flex-column" id="addtoCart">
                            <!-- code in javascript  -->
+                           <div class="cart-item">
+                                <span class="cart-item-name">Product Name</span>
+                                <span class="cart-item-price" id="productName">$10.99</span>
+                                <!-- <span class="cart-item-remove">&times;</span> -->
+                            </div>
+                           <div class="cart-item">
+                                <span class="cart-item-name">Price</span>
+                                <span class="cart-item-price" id="productPrice">$10.99</span>
+                                <!-- <span class="cart-item-remove">&times;</span> -->
+                            </div>
+                           <div class="cart-item">
+                                <span class="cart-item-name">Category</span>
+                                <span class="cart-item-price" id="productCate">$10.99</span>
+                                <!-- <span class="cart-item-remove">&times;</span> -->
+                            </div>
+                           <div class="cart-item">
+                                <span class="cart-item-name">Quantity</span>
+                                <span>
+                                    <input type="number" value="1" id="numberQtn" name="number">
+                                    <span class="cart-item-price" id="productQtn">$10.99</span>
+                                </span>
+                            </div>
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#checkInModal"  class="btn mt-5" id="btnChecking">Check in</button>
+                            
                         </div>
                     </div>
                 </div>
+            </div>
 
+            <!-- pop up edit product -->
+            <div class="modal fade" id="checkInModal" tabindex="-1" aria-labelledby="checkInModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="checkInModalLabel">Payment</h5>
+                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-flex flex-column">
+                                <!-- code in javascript  -->
+                                <div class="cart-item">
+                                     <span class="cart-item-name">Customer name:</span>
+                                     <span><input type="text" id="customer" placeholder="Name"></span>
+                                     <!-- <span class="cart-item-remove">&times;</span> -->
+                                 </div>
+                                <div class="cart-item">
+                                     <span class="cart-item-name">Product Name</span>
+                                     <span class="cart-item-price" id="productNameCheck">$10.99</span>
+                                     <!-- <span class="cart-item-remove">&times;</span> -->
+                                 </div>
+                                <div class="cart-item">
+                                     <span class="cart-item-name">Totals</span>
+                                     <span class="cart-item-price" id="productPriceCheck">$10.99</span>
+                                     <!-- <span class="cart-item-remove">&times;</span> -->
+                                 </div>
+                                <div class="cart-item">
+                                     <span class="cart-item-name">Category</span>
+                                     <span class="cart-item-price" id="productCateCheck">$10.99</span>
+                                     <!-- <span class="cart-item-remove">&times;</span> -->
+                                 </div>
+                                <div class="cart-item">
+                                     <span class="cart-item-name">Quantity</span>
+                                     <span>
+                                         <span class="cart-item-price" id="productQtnCheck">$10.99</span>
+                                     </span>
+                                 </div>
+                             </div>                      
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancal</button>
+                            <button type="button" class="btn btn-success" id="payBtn">Pay now</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </main>

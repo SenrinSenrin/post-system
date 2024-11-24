@@ -1,7 +1,7 @@
 let categoryData = [
-    { id: 1, name: "Electronics" },
-    { id: 2, name: "Clothing"},
-    { id: 3, name: "Books"}
+    // { id: 1, name: "Electronics" },
+    // { id: 2, name: "Clothing"},
+    // { id: 3, name: "Books"}
 ];
 
 const ulCategory = document.getElementById("ul-category")

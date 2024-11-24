@@ -46,7 +46,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center" href="#">
+                        <a class="nav-link d-flex align-items-center" href="Customer.html">
                             <span class="material-symbols-outlined me-2">people</span>
                             <span>Customers</span>
                         </a>
@@ -57,12 +57,12 @@
                             <span>Categories</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link d-flex align-items-center" href="#">
                             <span class="material-symbols-outlined me-2">bar_chart</span>
                             <span>Reports</span>
                         </a>
-                    </li>                    
+                    </li>                     -->
                 </ul>
             </div>
         </nav>
@@ -79,7 +79,7 @@
                     <div class="card text-white bg-primary mb-3">
                         <div class="card-body">
                             <h5 class="card-title">Total Sales</h5>
-                            <p class="card-text">$12,000</p>
+                            <p class="card-text" id="total-sales">$12,000</p>
                         </div>
                     </div>
                 </div>
@@ -87,63 +87,53 @@
                     <div class="card text-white bg-success mb-3">
                         <div class="card-body">
                             <h5 class="card-title">Total Products</h5>
-                            <p class="card-text">500</p>
+                            <p class="card-text" id="total-product">500</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card text-white bg-warning mb-3">
                         <div class="card-body">
-                            <h5 class="card-title">Customers</h5>
-                            <p class="card-text">200</p>
+                            <h5 class="card-title">Today sale</h5>
+                            <p class="card-text" id="today-sale">$0,00</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card text-white bg-danger mb-3">
                         <div class="card-body">
-                            <h5 class="card-title">Pending Orders</h5>
-                            <p class="card-text">15</p>
+                            <h5 class="card-title">Categories</h5>
+                            <p class="card-text" id="categories">15</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Recent Transactions Table -->
-            <h4 class="mt-4">Recent Transactions</h4>
+            <h4 class="mt-4">Recent Orders</h4>
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
                         <tr>
-                            <th>Transaction ID</th>
+                            <th>List</th>
                             <th>Date</th>
                             <th>Customer</th>
                             <th>Amount</th>
                             <th>Status</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>123456</td>
-                            <td>2024-11-01</td>
-                            <td>John Doe</td>
-                            <td>$100</td>
-                            <td><span class="badge bg-success">Completed</span></td>
-                        </tr>
-                        <tr>
-                            <td>123457</td>
-                            <td>2024-11-02</td>
-                            <td>Jane Smith</td>
-                            <td>$250</td>
-                            <td><span class="badge bg-warning">Pending</span></td>
-                        </tr>
-                        <!-- More rows as needed -->
+                    <tbody id="sale-today">
+                        <!-- code in javascript -->
                     </tbody>
+                    <div class="noSaleMessag" id="noSaleMessag">
+                        <!-- code in javascript -->
+                    </div>
                 </table>
             </div>
         </main>
     </div>
 </div>
+<script src="../JS/Dashboard.js"></script>
 
 <!-- Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
